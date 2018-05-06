@@ -7,7 +7,8 @@ import java.util.Scanner;
 /*
 1. View table content: Give user a list of existing tables so that he/she can select one to view the tuples.
  DONE(5 points) Show list of tables
- (10 points) Show table content when the user selects a table. This feature needs to work for the next step as well (so that you can verify the content after insert/update/deletion).
+ DONE(10 points) Show table content when the user selects a table. This feature needs to work for the next step as well
+ (so that you can verify the content after insert/update/deletion).
 2. Add records: Enter information for new customers, hotels, room types, reservations, etc. Update/delete information.
     Verify the updated table content. Test this for different tables.
  (15 points) Insert new tuples (check for primary key constraint & foreign key constraint)
