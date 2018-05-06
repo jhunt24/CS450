@@ -39,11 +39,11 @@ public class Main {
             userid = args[0];
             passwd = args[1];
         }
+        userid = userid.toUpperCase();//make userid uppercase for db queries
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@apollo.vse.gmu.edu:1521:ite10g", userid, passwd);
-            //…Do Actual Work …
 
             do {//infinite loop for menu, user can exit with q for quit
                 Database.displayMenu();//displays the menu after every command
