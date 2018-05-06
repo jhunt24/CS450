@@ -1,8 +1,21 @@
 import java.sql.*;
 
 class Database {
-    static void executeOption(String option, Connection conn){
+
+    private static void TableList(Connection conn) throws SQLException {
+        DatabaseMetaData md = conn.getMetaData();
+        ResultSet rs = md.getTables(null, null, "%", null);
+        while(rs.next()){
+            if (rs.getString(4).equalsIgnoreCase("TABLE") && rs.getString(2).equalsIgnoreCase("JHUNT11")) {
+                System.out.println(rs.getString(3));
+            }
+        }
+    }
+
+    static void executeOption(String option, Connection conn) throws SQLException {
         switch(option){
+            case "tl":
+                TableList(conn);
             case "q":
                 try {
                     conn.close();

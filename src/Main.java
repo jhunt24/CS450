@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 /*
 1. View table content: Give user a list of existing tables so that he/she can select one to view the tuples.
- (5 points) Show list of tables
+ DONE(5 points) Show list of tables
  (10 points) Show table content when the user selects a table. This feature needs to work for the next step as well (so that you can verify the content after insert/update/deletion).
 2. Add records: Enter information for new customers, hotels, room types, reservations, etc. Update/delete information.
     Verify the updated table content. Test this for different tables.
@@ -25,14 +25,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        if(args.length != 2){
-            System.out.println("incorrect number of arguments");
-            System.exit(1);
-        }
-        String userid = args[0];
-        String passwd = args[1];
-        String option;//for user input into menu
+        String option;//for user input
+        String userid;
+        String passwd;
         Scanner scanner = new Scanner(System.in);
+        if(args.length != 2){
+            System.out.println("Username: ");
+            userid = scanner.nextLine();
+            System.out.println("Password: ");
+            passwd = scanner.nextLine();
+        }
+        else {
+            userid = args[0];
+            passwd = args[1];
+        }
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
