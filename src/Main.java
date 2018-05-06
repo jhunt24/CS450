@@ -48,7 +48,7 @@ public class Main {
             do {//infinite loop for menu, user can exit with q for quit
                 Database.displayMenu();//displays the menu after every command
                 option = scanner.nextLine();//get user input
-                Database.executeOption(option, conn);//execute given command
+                Database.executeOption(option, conn, userid);//execute given command
             }while(true);
 
 

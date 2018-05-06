@@ -2,20 +2,21 @@ import java.sql.*;
 
 class Database {
 
-    private static void TableList(Connection conn) throws SQLException {
+    private static void TableList(Connection conn, String userid) throws SQLException {
         DatabaseMetaData md = conn.getMetaData();
         ResultSet rs = md.getTables(null, null, "%", null);
+        System.out.println("Table List:");
         while(rs.next()){
-            if (rs.getString(4).equalsIgnoreCase("TABLE") && rs.getString(2).equalsIgnoreCase("JHUNT11")) {
+            if (rs.getString(4).equalsIgnoreCase("TABLE") && rs.getString(2).equalsIgnoreCase(userid)) {
                 System.out.println(rs.getString(3));
             }
         }
     }
 
-    static void executeOption(String option, Connection conn) throws SQLException {
+    static void executeOption(String option, Connection conn, String userid) throws SQLException {
         switch(option){
             case "tl":
-                TableList(conn);
+                TableList(conn, userid);
             case "q":
                 try {
                     conn.close();
