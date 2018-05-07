@@ -538,23 +538,23 @@ class Database {
     	if (table.equals("CUSTOMER")) {
     		System.out.println("What is the CID?");
     		user_input = scanner.nextLine();
-    		int cid_int = Integer.parseInt(user_input);
+    		String cid = user_input;
     		String hold = "DELETE FROM " +table+ " WHERE c_id = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
-    		st.setInt(1, cid_int);
+    		st.setString(1, cid);
     		st.executeUpdate();
     		st.close();
     	}
     	if (table.equals("HOTEL")) {
     		System.out.println("What is the branch id?");
     		user_input = scanner.nextLine();
-    		int id_int = Integer.parseInt(user_input);
+    		String b_id = user_input;
     		System.out.println("What is the hotel name?");
     		user_input = scanner.nextLine();
     		String hotel_name = user_input;
-    		String hold = "DELETE FROM " +table+ " WHERE id = ? and hotel_name = ?";
+    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
-    		st.setInt(1, id_int);
+    		st.setString(1, b_id);
     		st.setString(2, hotel_name);
     		st.executeUpdate();
     		st.close();
@@ -568,7 +568,7 @@ class Database {
     		st.executeUpdate();
     		st.close();
     	}
-    	if (table.equals("DATELIST")) {
+    	if (table.equals("DATE_LIST")) {
     		System.out.println("What is the date?");
     		user_input = scanner.nextLine();
     		String hold = "DELETE FROM " +table+ " WHERE my_date = ?";
@@ -578,16 +578,24 @@ class Database {
     		st.close();
     	}
     	if (table.equals("RESERVATION_ON")) {
+    		System.out.println("What is the r_num?");
+    		user_input = scanner.nextLine();
+    		int r_num_int = Integer.parseInt(user_input);
     		System.out.println("What is the branch id?");
     		user_input = scanner.nextLine();
     		int id_int = Integer.parseInt(user_input);
     		System.out.println("What is the hotel name?");
     		user_input = scanner.nextLine();
     		String hotel_name = user_input;
-    		String hold = "DELETE FROM " +table+ " WHERE id = ? and hotel_name = ?";
+    		System.out.println("What is the room type?");
+    		user_input = scanner.nextLine();
+    		String room_type = user_input;
+    		String hold = "DELETE FROM " +table+ " WHERE r_num = ? and branch_id = ? and hotel_name = ? and room_type = ? ";
     		PreparedStatement st = conn.prepareStatement(hold);
-    		st.setInt(1, id_int);
-    		st.setString(2, hotel_name);
+    		st.setInt(1, r_num_int);
+    		st.setInt(2, id_int);
+    		st.setString(3, hotel_name);
+    		st.setString(4, room_type);
     		st.executeUpdate();
     		st.close();
     	}
@@ -618,7 +626,7 @@ class Database {
     		System.out.println("What is the hotel name?");
     		user_input = scanner.nextLine();
     		String hotel_name = user_input;
-    		String hold = "DELETE FROM " +table+ " WHERE id = ? and hotel_name = ?";
+    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
@@ -632,7 +640,7 @@ class Database {
     		System.out.println("What is the hotel name?");
     		user_input = scanner.nextLine();
     		String hotel_name = user_input;
-    		String hold = "DELETE FROM " +table+ " WHERE id = ? and hotel_name = ?";
+    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
