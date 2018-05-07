@@ -627,16 +627,19 @@ class Database {
 
     private static void getReservation(Connection conn) throws SQLException {
 
-        String id;//for user input of c_id
+        Integer id;//for user input of c_id
         Scanner scanner = new Scanner(System.in);
         System.out.println("c_id? ");
-        id = scanner.nextLine();
+        id = Integer.valueOf(scanner.nextLine());
 
-        Statement st = conn.createStatement();//query db for table data
-        String query = "select *" +
-                "from RESERVATION" +
-                "where" + id + "";
-        ResultSet rs = st.executeQuery(query);
+        String query = "select * " +
+                "from RESERVATION " +
+                "where c_id = ?";
+        System.out.println(query);
+        PreparedStatement preparedStatement;
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet rs = preparedStatement.executeQuery();
 
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnsNumber = rsmd.getColumnCount();//number of columns of table
@@ -653,7 +656,53 @@ class Database {
             System.out.println();//Move to the next line to print the next row.
         }
         rs.close();
-        st.close();
+        preparedStatement.close();
+    }
+
+    private static void findAvail(Connection conn) throws SQLException {
+
+        String city;//for user input to find avail
+        String state;
+        String date;
+        String roomType;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("city? ");
+        city = scanner.nextLine();
+        System.out.println("state? ");
+        state = scanner.nextLine();
+        System.out.println("date(MM/DD/YY)? ");
+        date = scanner.nextLine();
+        System.out.println("room type(single,suite,queen,king)? ");
+        roomType = scanner.nextLine();
+
+        String query = "select price " +
+                "from DATE_LIST_INFO inner join HOTEL on DATE_LIST_INFO.branch_id = HOTEL.branch_id " +
+                "where city = ? AND state = ? AND date = ? AND room_type = ?";
+        System.out.println(query);
+        PreparedStatement preparedStatement;
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setString(1, city);
+        preparedStatement.setString(2, state);
+        preparedStatement.setString(3, date);
+        preparedStatement.setString(4, roomType);
+        ResultSet rs = preparedStatement.executeQuery();
+
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();//number of columns of table
+
+        for(int i = 1 ; i <= columnsNumber; i++){//prints labels for table
+            System.out.format("%-15s", rsmd.getColumnName(i));
+        }
+        System.out.println();//next line
+
+        while (rs.next()) {
+            for(int i = 1 ; i <= columnsNumber; i++){//prints data from table
+                System.out.format("%-15s", rs.getString(i));
+            }
+            System.out.println();//Move to the next line to print the next row.
+        }
+        rs.close();
+        preparedStatement.close();
     }
 
     static void executeOption(String option, Connection conn, String userid) throws SQLException {
@@ -677,6 +726,7 @@ class Database {
                 getReservation(conn);
                 break;
             case "fa":
+                findAvail(conn);
                 break;
             case "q":
                 try {
