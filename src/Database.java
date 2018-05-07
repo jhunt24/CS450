@@ -264,7 +264,7 @@ class Database {
                 var3 = Integer.valueOf(scanner.nextLine());
                 System.out.println("room_type? ");
                 var4 = scanner.nextLine();
-                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?,?,?,?,?)";
+                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?,?,?)";
 
                 preparedStatement = conn.prepareStatement(sql);
 
@@ -621,6 +621,37 @@ class Database {
     	}
     }
 
+    private static void getReservation(Connection conn) throws SQLException {
+
+        String id;//for user input of c_id
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("c_id? ");
+        id = scanner.nextLine();
+
+        Statement st = conn.createStatement();//query db for table data
+        String query = "select *" +
+                "from RESERVATION" +
+                "where" + id + "";
+        ResultSet rs = st.executeQuery(query);
+
+        ResultSetMetaData rsmd = rs.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();//number of columns of table
+
+        for(int i = 1 ; i <= columnsNumber; i++){//prints labels for table
+            System.out.format("%-15s", rsmd.getColumnName(i));
+        }
+        System.out.println();//next line
+
+        while (rs.next()) {
+            for(int i = 1 ; i <= columnsNumber; i++){//prints data from table
+                System.out.format("%-15s", rs.getString(i));
+            }
+            System.out.println();//Move to the next line to print the next row.
+        }
+        rs.close();
+        st.close();
+    }
+
     static void executeOption(String option, Connection conn, String userid) throws SQLException {
         switch(option){
             case "tl":
@@ -639,6 +670,7 @@ class Database {
             	DeleteTuple(conn);
                 break;
             case "gr":
+                getReservation(conn);
                 break;
             case "fa":
                 break;
