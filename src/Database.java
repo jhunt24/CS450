@@ -586,14 +586,22 @@ class Database {
     	if (table.equals("DATE_LIST_INFO")) {
     		System.out.println("What is the branch id?");
     		user_input = scanner.nextLine();
-    		int id_int = Integer.parseInt(user_input);
+    		String b_id = user_input;
     		System.out.println("What is the hotel name?");
     		user_input = scanner.nextLine();
     		String hotel_name = user_input;
-    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ?";
+    		System.out.println("What is the date?");
+    		user_input = scanner.nextLine();
+    		String date = user_input;
+    		System.out.println("What is the room type?");
+    		user_input = scanner.nextLine();
+    		String room_type = user_input;
+    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ? and my_date = ? and room_type = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
-    		st.setInt(1, id_int);
+    		st.setString(1, b_id);
     		st.setString(2, hotel_name);
+    		st.setString(3, date);
+    		st.setString(4, room_type);
     		st.executeUpdate();
     		st.close();
     	}
