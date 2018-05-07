@@ -628,13 +628,14 @@ class Database {
         System.out.println("c_id? ");
         id = Integer.valueOf(scanner.nextLine());
 
-        String query = "select C_ID" +
-                "from RESERVATION" +
-                "where C_ID = ?";
+        String query = "select * " +
+                "from RESERVATION " +
+                "where c_id = ?";
+        System.out.println(query);
         PreparedStatement preparedStatement;
         preparedStatement = conn.prepareStatement(query);
         preparedStatement.setInt(1, id);
-        ResultSet rs = preparedStatement.executeQuery(query);
+        ResultSet rs = preparedStatement.executeQuery();
 
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnsNumber = rsmd.getColumnCount();//number of columns of table
