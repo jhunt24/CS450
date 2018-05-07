@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 class Database {
 
-    private static void TableList(Connection conn, String userid) throws SQLException {
+    private static void tableList(Connection conn, String userid) throws SQLException {
         DatabaseMetaData md = conn.getMetaData();//database meta data
         ResultSet rs = md.getTables(null, userid, "%", null);
         System.out.println("Table List:");
@@ -12,9 +12,10 @@ class Database {
                 System.out.println(rs.getString(3));
             }
         }
+        rs.close();
     }
 
-    private static void ViewTable(Connection conn) throws SQLException {
+    private static void viewTable(Connection conn) throws SQLException {
 
         String table;//for user input of table
         Scanner scanner = new Scanner(System.in);
@@ -41,6 +42,244 @@ class Database {
             }
             System.out.println();//Move to the next line to print the next row.
         }
+        rs.close();
+        st.close();
+    }
+
+    private static void insertTable(Connection conn) throws SQLException {
+
+        PreparedStatement preparedStatement;
+        String table;//for user input of table
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Which Table? ");
+        table = scanner.nextLine();
+        table = table.toUpperCase();
+
+        switch(table){//insert for each possible table
+            case "CUSTOMER": {
+                String var1;
+                String var2;
+                Integer var3;
+                String var4;
+                System.out.println("c_id? ");
+                var1 = scanner.nextLine();
+                System.out.println("c_name? ");
+                var2 = scanner.nextLine();
+                System.out.println("age? ");
+                var3 = Integer.valueOf(scanner.nextLine());
+                System.out.println("gender? ");
+                var4 = scanner.nextLine();
+                String sql = "INSERT INTO CUSTOMER VALUES (?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setString(1, var1);
+                preparedStatement.setString(2, var2);
+                preparedStatement.setInt(3, var3);
+                preparedStatement.setString(4, var4);
+                break;
+            }
+            case "RESERVATION": {
+                Integer var1;
+                String var2;
+                Integer var3;
+                Integer var4;
+                System.out.println("r_num? ");
+                var1 = Integer.valueOf(scanner.nextLine());
+                System.out.println("c_id? ");
+                var2 = scanner.nextLine();
+                System.out.println("party_size? ");
+                var3 = Integer.valueOf(scanner.nextLine());
+                System.out.println("total? ");
+                var4 = Integer.valueOf(scanner.nextLine());
+                String sql = "INSERT INTO RESERVATION VALUES (?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setInt(1, var1);
+                preparedStatement.setString(2, var2);
+                preparedStatement.setInt(3, var3);
+                preparedStatement.setInt(4, var4);
+                break;
+            }
+            case "DATE_LIST": {
+                String var1;
+                System.out.println("my_date? ");
+                var1 = scanner.nextLine();
+                String sql = "INSERT INTO DATE_LIST VALUES (?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setString(1, var1);
+                break;
+            }
+            case "HOTEL": {
+                String var1;
+                String var2;
+                String var3;
+                String var4;
+                Integer var5;
+                String var6;
+                Integer var7;
+                String var8;
+                System.out.println("hotel_name? ");
+                var1 = scanner.nextLine();
+                System.out.println("branch_id? ");
+                var2 = scanner.nextLine();
+                System.out.println("city? ");
+                var3 = scanner.nextLine();
+                System.out.println("state? ");
+                var4 = scanner.nextLine();
+                System.out.println("zip? ");
+                var5 = Integer.valueOf(scanner.nextLine());
+                System.out.println("phone? ");
+                var6 = scanner.nextLine();
+                System.out.println("street_num? ");
+                var7 = Integer.valueOf(scanner.nextLine());
+                System.out.println("street_name? ");
+                var8 = scanner.nextLine();
+                String sql = "INSERT INTO HOTEL VALUES (?,?,?,?,?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setString(1, var1);
+                preparedStatement.setString(2, var2);
+                preparedStatement.setString(3, var3);
+                preparedStatement.setString(4, var4);
+                preparedStatement.setInt(1, var5);
+                preparedStatement.setString(2, var6);
+                preparedStatement.setInt(3, var7);
+                preparedStatement.setString(4, var8);
+                break;
+            }
+            case "ROOM": {
+                String var1;
+                Integer var2;
+                System.out.println("room_type? ");
+                var1 = scanner.nextLine();
+                System.out.println("capacity? ");
+                var2 = Integer.valueOf(scanner.nextLine());
+                String sql = "INSERT INTO ROOM VALUES (?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setString(1, var1);
+                preparedStatement.setInt(2, var2);
+                break;
+            }
+            case "RESERVATION_ON": {
+                Integer var1;
+                String var2;
+                String var3;
+                String var4;
+                System.out.println("r_num? ");
+                var1 = Integer.valueOf(scanner.nextLine());
+                System.out.println("hotel_name? ");
+                var2 = scanner.nextLine();
+                System.out.println("branch_id? ");
+                var3 = scanner.nextLine();
+                System.out.println("room_type? ");
+                var4 = scanner.nextLine();
+                String sql = "INSERT INTO RESERVATION_ON VALUES (?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setInt(1, var1);
+                preparedStatement.setString(2, var2);
+                preparedStatement.setString(2, var3);
+                preparedStatement.setString(2, var4);
+                break;
+            }
+            case "RESERVATION_CHECK_IN": {
+                Integer var1;
+                String var2;
+                System.out.println("r_num? ");
+                var1 = Integer.valueOf(scanner.nextLine());
+                System.out.println("my_date? ");
+                var2 = scanner.nextLine();
+                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setInt(1, var1);
+                preparedStatement.setString(2, var2);
+                break;
+            }
+            case "RESERVATION_CHECK_OUT": {
+                Integer var1;
+                String var2;
+                System.out.println("r_num? ");
+                var1 = Integer.valueOf(scanner.nextLine());
+                System.out.println("my_date? ");
+                var2 = scanner.nextLine();
+                String sql = "INSERT INTO RESERVATION_CHECK_OUT VALUES (?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setInt(1, var1);
+                preparedStatement.setString(2, var2);
+                break;
+            }
+            case "DATE_LIST_INFO": {
+                String var1;
+                Integer var2;
+                Integer var3;
+                String var4;
+                String var5;
+                String var6;
+                System.out.println("my_date? ");
+                var1 = scanner.nextLine();
+                System.out.println("price? ");
+                var2 = Integer.valueOf(scanner.nextLine());
+                System.out.println("num_avail? ");
+                var3 = Integer.valueOf(scanner.nextLine());
+                System.out.println("hotel_name? ");
+                var4 = scanner.nextLine();
+                System.out.println("branch_id? ");
+                var5 = scanner.nextLine();
+                System.out.println("room_type? ");
+                var6 = scanner.nextLine();
+                String sql = "INSERT INTO DATE_LIST_INFO VALUES (?,?,?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setString(1, var1);
+                preparedStatement.setInt(2, var2);
+                preparedStatement.setInt(2, var3);
+                preparedStatement.setString(1, var4);
+                preparedStatement.setString(1, var5);
+                preparedStatement.setString(1, var6);
+                break;
+            }
+            case "HAS": {
+                String var1;
+                String var2;
+                Integer var3;
+                String var4;
+                System.out.println("hotel_name? ");
+                var1 = scanner.nextLine();
+                System.out.println("branch_id? ");
+                var2 = scanner.nextLine();
+                System.out.println("quantity? ");
+                var3 = Integer.valueOf(scanner.nextLine());
+                System.out.println("room_type? ");
+                var4 = scanner.nextLine();
+                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?,?,?,?,?)";
+
+                preparedStatement = conn.prepareStatement(sql);
+
+                preparedStatement.setString(1, var1);
+                preparedStatement.setString(2, var2);
+                preparedStatement.setInt(2, var3);
+                preparedStatement.setString(1, var4);
+                break;
+            }
+            default:
+                System.out.println("Table does not exist");
+                return;
+        }
+        preparedStatement.executeUpdate();//execute insert
+        preparedStatement.close();//close statement
     }
     private static void DeleteTuple(Connection conn) throws SQLException {
     	String table;
@@ -158,12 +397,13 @@ class Database {
     static void executeOption(String option, Connection conn, String userid) throws SQLException {
         switch(option){
             case "tl":
-                TableList(conn, userid);
+                tableList(conn, userid);
                 break;
             case "vt":
-                ViewTable(conn);
+                viewTable(conn);
                 break;
             case "it":
+                insertTable(conn);
                 break;
             case "ut":
                 break;
