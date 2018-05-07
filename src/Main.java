@@ -18,7 +18,7 @@ import java.util.Scanner;
  (5 points) Test for trigger to check that the party size does not exceed the capacity of the room type for a new reservation.
  (10 points) Test for trigger to update available room count. A new reservation should not be allowed if the room count is zero for the specified room type and any date within the date range.
 3.Search database: search for a given user’s reservation(s), search availability and prices for hotels in a given location, for a certain party size (or room type), on given check-in and check-out dates
- (10 points) Retrieve a given user’s reservation
+ DONE(10 points) Retrieve a given user’s reservation
  (10 points) Find availability and prices based on input parameters (location, dates, party size/room type)
  */
 
