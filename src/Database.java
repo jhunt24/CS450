@@ -612,10 +612,14 @@ class Database {
     		System.out.println("What is the hotel name?");
     		user_input = scanner.nextLine();
     		String hotel_name = user_input;
-    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ?";
+    		System.out.println("What is the room type?");
+    		user_input = scanner.nextLine();
+    		String roomType = user_input;
+    		String hold = "DELETE FROM " +table+ " WHERE branch_id = ? and hotel_name = ? and room_type = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
+    		st.setString(3, roomType);
     		st.executeUpdate();
     		st.close();
     	}
