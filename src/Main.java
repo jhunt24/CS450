@@ -12,7 +12,7 @@ import java.util.Scanner;
 2. Add records: Enter information for new customers, hotels, room types, reservations, etc. Update/delete information.
     Verify the updated table content. Test this for different tables.
  DONE(15 points) Insert new tuples (check for primary key constraint & foreign key constraint)
- (15 points) Update tuples (check for primary key & foreign key constraint)
+ DONE(15 points) Update tuples (check for primary key & foreign key constraint)
  DONE(15 points) Delete tuples
  (10 points) Test for trigger to calculate the total price for a new reservation.
  (5 points) Test for trigger to check that the party size does not exceed the capacity of the room type for a new reservation.

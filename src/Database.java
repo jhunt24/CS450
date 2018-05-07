@@ -197,7 +197,7 @@ class Database {
                 var1 = Integer.valueOf(scanner.nextLine());
                 System.out.println("my_date? ");
                 var2 = scanner.nextLine();
-                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?,?,?)";
+                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?)";
 
                 preparedStatement = conn.prepareStatement(sql);
 
@@ -212,7 +212,7 @@ class Database {
                 var1 = Integer.valueOf(scanner.nextLine());
                 System.out.println("my_date? ");
                 var2 = scanner.nextLine();
-                String sql = "INSERT INTO RESERVATION_CHECK_OUT VALUES (?,?,?,?)";
+                String sql = "INSERT INTO RESERVATION_CHECK_OUT VALUES (?,?)";
 
                 preparedStatement = conn.prepareStatement(sql);
 
