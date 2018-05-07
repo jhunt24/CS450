@@ -264,7 +264,7 @@ class Database {
                 var3 = Integer.valueOf(scanner.nextLine());
                 System.out.println("room_type? ");
                 var4 = scanner.nextLine();
-                String sql = "INSERT INTO RESERVATION_CHECK_IN VALUES (?,?,?,?)";
+                String sql = "INSERT INTO HAS VALUES (?,?,?,?)";
 
                 preparedStatement = conn.prepareStatement(sql);
 
