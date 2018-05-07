@@ -623,16 +623,18 @@ class Database {
 
     private static void getReservation(Connection conn) throws SQLException {
 
-        String id;//for user input of c_id
+        Integer id;//for user input of c_id
         Scanner scanner = new Scanner(System.in);
         System.out.println("c_id? ");
-        id = scanner.nextLine();
+        id = Integer.valueOf(scanner.nextLine());
 
-        Statement st = conn.createStatement();//query db for table data
-        String query = "select *" +
+        String query = "select C_ID" +
                 "from RESERVATION" +
-                "where" + id + "";
-        ResultSet rs = st.executeQuery(query);
+                "where C_ID = ?";
+        PreparedStatement preparedStatement;
+        preparedStatement = conn.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+        ResultSet rs = preparedStatement.executeQuery(query);
 
         ResultSetMetaData rsmd = rs.getMetaData();
         int columnsNumber = rsmd.getColumnCount();//number of columns of table
@@ -649,7 +651,7 @@ class Database {
             System.out.println();//Move to the next line to print the next row.
         }
         rs.close();
-        st.close();
+        preparedStatement.close();
     }
 
     static void executeOption(String option, Connection conn, String userid) throws SQLException {
