@@ -296,15 +296,17 @@ class Database {
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, r_num_int);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("CUSTOMER")) {
     		System.out.println("What is the CID?");
     		user_input = scanner.nextLine();
     		int cid_int = Integer.parseInt(user_input);
-    		String hold = "DELETE FROM " +table+ " WHERE cid = ?";
+    		String hold = "DELETE FROM " +table+ " WHERE c_id = ?";
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, cid_int);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("HOTEL")) {
     		System.out.println("What is the branch id?");
@@ -318,6 +320,7 @@ class Database {
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("ROOM")) {
     		System.out.println("What is the room type?");
@@ -326,6 +329,7 @@ class Database {
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setString(1, user_input);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("DATELIST")) {
     		System.out.println("What is the date?");
@@ -334,6 +338,7 @@ class Database {
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setString(1, user_input);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("RESERVATION_ON")) {
     		System.out.println("What is the branch id?");
@@ -347,6 +352,7 @@ class Database {
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("RESERVATION_CHECK_IN")) {
     		System.out.println("What is the r_num?");
@@ -356,6 +362,7 @@ class Database {
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, r_num_int);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("RESERVATION_CHECK_OUT")) {
     		System.out.println("What is the r_num?");
@@ -365,6 +372,7 @@ class Database {
     		PreparedStatement st = conn.prepareStatement(hold);
     		st.setInt(1, r_num_int);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("DATE_LIST_INFO")) {
     		System.out.println("What is the branch id?");
@@ -378,6 +386,7 @@ class Database {
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
     		st.executeUpdate();
+    		st.close();
     	}
     	if (table.equals("HAS")) {
     		System.out.println("What is the branch id?");
@@ -391,6 +400,7 @@ class Database {
     		st.setInt(1, id_int);
     		st.setString(2, hotel_name);
     		st.executeUpdate();
+    		st.close();
     	}
     }
 
